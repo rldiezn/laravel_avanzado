@@ -1,23 +1,41 @@
-/.phpunit.cache
-/node_modules
-/public/build
+# Laravel específico
+/vendor/
+/node_modules/
 /public/hot
 /public/storage
 /storage/*.key
-/storage/pail
-/vendor
 .env
 .env.backup
-.env.production
-.phpactor.json
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
+
+# IDE y Editor
 /.idea
-/.nova
 /.vscode
-/.zed
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Dependencias y Caches
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+composer.lock
+package-lock.json
+/.phpstorm.meta.php
+/_ide_helper.php
+/_ide_helper_models.php
+
+# Testing y Cobertura
+/coverage/
+.phpunit.cache
+
+# Logs y bases de datos
+*.log
+*.sqlite
+*.sqlite3
+
+# Archivos de construcción
+/public/build
+/public/css
+/public/js
+/public/mix-manifest.json
