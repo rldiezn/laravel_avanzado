@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Profile;
+use App\Models\Category;
 
 
 Route::pattern('id', '[0-9]+');
@@ -336,5 +339,87 @@ Route::get('/test-query-builder-paginate',function(){
     ;
 
     return view('test-paginate',compact('users'));
+
+});
+
+Route::get('/test-eloquent',function(){
+
+    //ejemplo de obterner datos mediante eloquent
+    $users = User::orderBy('id','desc')->get();
+
+    //ejemplo de insertar datos mediante eloquent
+    $users = new User();
+
+    $users->name = "Maricruz Hernandez Romero";
+    $users->email = "maricruuzz47@gmail.com";
+    $users->password = bcrypt('123456');
+
+    //$users->save();
+
+    //ejemplo de insertar masivamente datos mediante eloquent
+    $params = [
+        'name' => 'Isometricos',
+        'description' => 'Ejercicio que tranbajan la resistencia muscular mediante posiciones estaticas'
+    ];
+
+    //$new_category = Category::create($params);
+
+    $categories = [
+        [
+            'name' => 'Isometricos',
+            'description' => 'Ejercicio que trabajan la resistencia muscular mediante posiciones estaticas'
+        ],
+        [
+            'name' => 'Cardiovascular',
+            'description' => 'Ejercicios que aumentan la frecuencia cardíaca y mejoran la capacidad pulmonar'
+        ],
+        [
+            'name' => 'Flexibilidad',
+            'description' => 'Ejercicios que mejoran el rango de movimiento de las articulaciones'
+        ],
+        [
+            'name' => 'Funcional',
+            'description' => 'Ejercicios que simulan movimientos de la vida diaria'
+        ]
+    ];
+
+    $new_category = [];
+    foreach ($categories as $category) {
+        //$new_category[] = Category::create($category);
+    }
+
+    //return $new_category;
+
+
+    //ejemplo para editar datos con eloquent
+    $user = User::find(100);
+
+    $user->email = $user->email.".test.r10";
+    $user->save();
+
+    //ejemplo para edicion masiva con eloquent
+    $params =[
+        'name' => 'prueba de curso laraval'
+    ];
+
+    $user = User::find(100);
+
+    $user->update($params);
+
+    //Ejemplo de eliminacion con Eloquent
+    $user = User::find(80);
+    //$user->delete();
+
+    //Ejemplo de eliminacion masiva con Eloquent
+    $users_id = [79,78,77];
+    $user = User::whereIn('id',$users_id)->delete();
+
+    $user = User::find(875);
+    $user_profile = $user->profile;
+
+    $profile = Profile::find(875);
+    $profile_user = $profile->user;
+
+    return $profile_user;
 
 });

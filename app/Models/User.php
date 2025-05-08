@@ -24,6 +24,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that are not mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $guarded = [
+        'active'
+    ];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
@@ -44,5 +53,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    //Ejemplo de relacion uno a uno
+    public function profile(){
+        return $this->hasOne(Profile::class);
     }
 }
