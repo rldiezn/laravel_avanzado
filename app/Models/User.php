@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
+    //Ejemplo de relacion uno a uno a travez de
+    public function address(){
+        return $this->hasOneThrough(Address::class,Profile::class);
+    }
 }

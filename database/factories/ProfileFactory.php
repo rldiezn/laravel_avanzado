@@ -21,10 +21,7 @@ class ProfileFactory extends Factory
         return [
             'job' => $this->faker->JobTitle(),
             'phone' => $this->faker->phoneNumber(),
-            'website' => $this->faker->url(),
-            'address' => $this->faker->streetAddress(),
-            'city' => $this->faker->city(),
-            'country' => $this->faker->country(),
+            'website' => $this->faker->url()
         ];
     }
 }

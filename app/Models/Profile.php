@@ -18,15 +18,15 @@ class Profile extends Model
         'user_id',
         'job',
         'phone',
-        'website',
-        'address',
-        'city',
-        'country'
+        'website'
     ];
 
     //Ejemplo de relacion uno a uno
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function address(){
+        return $this->hasOne(Address::class);
     }
 
 }

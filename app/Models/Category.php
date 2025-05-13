@@ -17,7 +17,12 @@ class Category extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'training_id',
         'name',
         'description'
     ];
+
+    public function exercises(){
+        return $this->hasMany(Exercise::class);
+    }
 }

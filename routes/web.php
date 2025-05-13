@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Category;
-
+use App\Models\Exercise;
+use App\Models\training;
 
 Route::pattern('id', '[0-9]+');
 
@@ -414,12 +415,44 @@ Route::get('/test-eloquent',function(){
     $users_id = [79,78,77];
     $user = User::whereIn('id',$users_id)->delete();
 
-    $user = User::find(875);
+    //ejemplo de relacion uno a uno (hasOne)
+    $user = User::find(80);
     $user_profile = $user->profile;
+    $user_address = $user->address;
 
     $profile = Profile::find(875);
     $profile_user = $profile->user;
 
-    return $profile_user;
+    //ejemplo de relacion uno a muchos (hasMany)
+    $category = Category::find(2);
+    $cat_exercises = $category->exercises;
+
+    $exercise = Exercise::find(3);
+    $exercise_cat = $exercise->category;
+    $exercise_training = $exercise->training;
+
+    //relacion muchos a muchos
+    $tags = [10,8,7];
+    //insertar tagas con attach
+    //$exercise->tags()->attach([1,2,3]);
+    //editar o sincronizar tags con sync
+    //$exercise->tags()->sync($tags);
+    //borrar tag con detach
+    //$exercise->tags()->detach([1,2,3]);
+    //asignar un tag y un valor extra a la tabla pivote
+    $exercise->tags()->attach([
+        1 => [
+            'data' => 'testR10'
+        ]
+    ]);
+    $exercise_tags = $exercise->tags;
+
+
+    $training = training::find(2);
+    $training_exercises = $training->exercises;
+
+
+
+    return $exercise;
 
 });
