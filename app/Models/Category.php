@@ -25,4 +25,9 @@ class Category extends Model
     public function exercises(){
         return $this->hasMany(Exercise::class);
     }
+
+    //relacion polifmorfica con imagen
+    public function image(){
+        return $this->morphOne(Image::class,'imageable');
+    }
 }

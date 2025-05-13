@@ -18,4 +18,9 @@ class training extends Model
     public function exercises(){
         return $this->hasManyThrough(Exercise::class,Category::class);
     }
+
+    //relacion polifmorfica con imagen
+    public function image(){
+        return $this->morphOne(Image::class,'imageable');
+    }
 }

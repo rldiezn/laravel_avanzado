@@ -34,7 +34,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Training::factory(10)->create();
+        Training::factory(10)->create()->each(function ($training){
+            $training->image()->create([
+                'url' => 'https://picsum.photos/400/300?random=' . $training->id
+            ]);
+        });
+
         Tag::factory(10)->create();
         $this->call(CategorySeeder::class);
         $this->call(ExerciseSeeder::class);

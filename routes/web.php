@@ -426,6 +426,8 @@ Route::get('/test-eloquent',function(){
     //ejemplo de relacion uno a muchos (hasMany)
     $category = Category::find(2);
     $cat_exercises = $category->exercises;
+    //ejemplo de relacion polimorfica
+    $cat_image = $category->image;
 
     $exercise = Exercise::find(3);
     $exercise_cat = $exercise->category;
@@ -450,9 +452,11 @@ Route::get('/test-eloquent',function(){
 
     $training = training::find(2);
     $training_exercises = $training->exercises;
+    //ejemplo de relacion polimorfica
+    $training_image = $training->image;
 
 
 
-    return $exercise;
+    return $category;
 
 });
