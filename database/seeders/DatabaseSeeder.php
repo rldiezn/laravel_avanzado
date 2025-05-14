@@ -18,31 +18,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        //usando el factory para crear registros
-        User::factory(1000)->create()->each(function ($user){
-            //una vez creado esos registros de prueba los obtenemos y creamos perfiles asocioandolos a los usuarios
-            Profile::factory(1)->create(['user_id' => $user->id])->each(function ($profile){
-                //al terminar de crear los perfiles los obtenemos y creamos direcciones que seran asociadas a perfiles
-                Address::factory(1)->create([
-                    'profile_id' => $profile->id
-                ]);
-            });
-        });
+        //usando el factories para crear registros
+        $this->call([
+            UserSeeder::class,
+            TrainingSeeder::class,
+            TagSeeder::class,
+            CategorySeeder::class,
+            ExerciseSeeder::class
+        ]);
 
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        Training::factory(10)->create()->each(function ($training){
-            $training->image()->create([
-                'url' => 'https://picsum.photos/400/300?random=' . $training->id
-            ]);
-        });
-
-        Tag::factory(10)->create();
-        $this->call(CategorySeeder::class);
-        $this->call(ExerciseSeeder::class);
 
     }
 }
