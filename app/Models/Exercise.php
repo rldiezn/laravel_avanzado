@@ -30,4 +30,14 @@ class Exercise extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class)->withPivot('data')->withTimestamps();
     }
+
+    //relacion polimorfica de uno a muchos
+    public function comments(){
+        return $this->morphMany(Comment::class,'commentable');
+    }
+
+    //relacion polimorfica de muchas a muchos
+    public function taggables(){
+        return $this->morphToMany(Tag::class,'taggable')->withTimestamps();
+    }
 }

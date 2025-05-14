@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Exercise;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -115,12 +116,26 @@ class ExerciseSeeder extends Seeder
             ],
         ];
 
-        // Insertar todos los ejercicios en la base de datos
-        DB::table('exercises')->insert(array_merge(
+        $all_exercises = array_merge(
             $chestExercises,
             $armExercises,
             $backExercises,
             $legExercises
-        ));
+        );
+
+        foreach ($all_exercises as $exerciseData) {
+            $exercise = Exercise::create($exerciseData);
+
+            // Crear imagen para esta categoría
+            $exercise->comments()->create([
+                'body' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in metus ut ligula dictum egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam lacus quam, posuere nec fermentum in, pulvinar in nulla. Proin at elit ultricies, pulvinar eros eu, volutpat tortor. Ut id nulla convallis, gravida purus vel, convallis turpis. Mauris porta enim non est vulputate, at porta eros eleifend. Nullam tempor ex dui. Vivamus pharetra, felis a dignissim pulvinar, tellus magna bibendum nulla, posuere consequat leo purus at enim. Nam ornare et nisi dapibus porttitor. In eu consequat lacus, et venenatis elit. Proin nulla elit, finibus non diam vitae, porttitor ornare velit. Nullam non viverra odio, eget fringilla diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec eleifend felis et magna placerat, sed tincidunt libero porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+            ]);
+
+            $exercise->comments()->create([
+                'body' => "Morbi ullamcorper aliquam sollicitudin. Nullam sagittis lobortis lacus, non euismod massa. Aenean ut quam ex. In feugiat eros sit amet tortor facilisis, sit amet aliquam orci ultrices. Sed porta sapien neque, in dignissim neque rhoncus et. Vestibulum justo ipsum, porta vel fringilla pretium, eleifend vel ipsum. Sed venenatis ipsum eu odio luctus, a pretium urna vehicula. Vivamus interdum pulvinar elit, sit amet feugiat sapien pharetra a."
+            ]);
+        }
+
+
     }
 }

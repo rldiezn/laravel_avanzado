@@ -428,10 +428,13 @@ Route::get('/test-eloquent',function(){
     $cat_exercises = $category->exercises;
     //ejemplo de relacion polimorfica
     $cat_image = $category->image;
+    $category->taggables()->attach([10,9]);
+    $cat_taggable = $category->taggables;
 
     $exercise = Exercise::find(3);
     $exercise_cat = $exercise->category;
     $exercise_training = $exercise->training;
+    $exercise_comments = $exercise->comments;
 
     //relacion muchos a muchos
     $tags = [10,8,7];
@@ -448,6 +451,9 @@ Route::get('/test-eloquent',function(){
         ]
     ]);
     $exercise_tags = $exercise->tags;
+    //asignar tag polimorficos
+    $exercise->taggables()->attach([1,5,7]);
+    $exercise_taggables = $exercise->taggables;
 
 
     $training = training::find(2);
@@ -457,6 +463,6 @@ Route::get('/test-eloquent',function(){
 
 
 
-    return $category;
+    return $exercise;
 
 });

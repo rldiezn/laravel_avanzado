@@ -30,4 +30,10 @@ class Category extends Model
     public function image(){
         return $this->morphOne(Image::class,'imageable');
     }
+
+    //relacion polimorfica de muchas a muchos
+    public function taggables(){
+        return $this->morphToMany(Tag::class,'taggable')->withTimestamps();
+    }
+
 }

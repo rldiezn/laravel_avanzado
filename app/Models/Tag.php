@@ -23,4 +23,14 @@ class Tag extends Model
     public function exercises(){
         return $this->belongsToMany(Exercise::class)->withPivot('data')->withTimestamps();
     }
+
+    //relacion inversa muchos a muchos polimorfica
+    public function categories(){
+        return $this->morphedByMany(Category::class,"taggable");
+    }
+
+    //relacion inversa muchos a muchos polimorfica
+    public function exercisesable(){
+        return $this->morphedByMany(Exercise::class,"taggable");
+    }
 }
