@@ -20,7 +20,7 @@
         }
         .container {
             width: 100%;
-            max-width: 900px;
+            /*max-width: 900px;*/
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -88,6 +88,12 @@
             padding: 5px;
             transition: color 0.3s ease;
         }
+        .btn-show {
+            color: #69b2d5;
+        }
+        .btn-show:hover {
+            color: #09acf8;
+        }
         .btn-edit {
             color: #4CAF50;
         }
@@ -120,9 +126,11 @@
     </x-anonimo.title>
 
     <div class="header">
-        <button class="btn-create" title="Crear Nuevo Ejercicio">
-            <i class="fas fa-plus"></i>
-        </button>
+        <a href="/exercise/create">
+            <button class="btn-create" title="Crear Nuevo Ejercicio">
+                <i class="fas fa-plus"></i>
+            </button>
+        </a>
     </div>
 
     <table>
@@ -137,14 +145,21 @@
         <tbody>
           @forelse ($ejercicios as $ejercicio)
             <tr>
-                <td>{{ $ejercicio['ejercicio'] }}</td>
-                <td>{{ $ejercicio['grupo_muscular'] }}</td>
-                <td>{{ $ejercicio['descripcion'] }}</td>
+                <td>{{ $ejercicio->name }}</td>
+                <td>{{ $ejercicio->category->name }}</td>
+                <td>{{ $ejercicio->description }}</td>
                 <td>
                   <div class="action-buttons">
+                    <a href="/exercise/{{ $ejercicio->id }}">
+                      <button class="btn btn-show" title="Editar">
+                          <i class="fas fa-eye"></i>
+                      </button>
+                    </a>
+                    <a href="/exercise/edit/{{ $ejercicio->id }}">
                       <button class="btn btn-edit" title="Editar">
                           <i class="fas fa-edit"></i>
                       </button>
+                    </a>
                       <button class="btn btn-delete" title="Eliminar">
                           <i class="fas fa-trash-alt"></i>
                       </button>

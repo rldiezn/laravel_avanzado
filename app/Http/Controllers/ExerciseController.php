@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exercise;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -11,33 +12,7 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        $ejercicios = [
-            [
-                'ejercicio' => 'Press de Banca',
-                'grupo_muscular' => 'Pecho',
-                'descripcion' => 'Ejercicio fundamental para desarrollar los músculos pectorales'
-            ],
-            [
-                'ejercicio' => 'Sentadillas (Squats)',
-                'grupo_muscular' => 'Piernas',
-                'descripcion' => 'Ejercicio compuesto que trabaja cuádriceps, glúteos y piernas'
-            ],
-            [
-                'ejercicio' => 'Elevaciones Laterales',
-                'grupo_muscular' => 'Hombros',
-                'descripcion' => 'Ejercicio para desarrollar los deltoides laterales'
-            ],
-            [
-                'ejercicio' => 'Peso Muerto',
-                'grupo_muscular' => 'Espalda y Piernas',
-                'descripcion' => 'Ejercicio que trabaja múltiples grupos musculares'
-            ],
-            [
-                'ejercicio' => 'Curl de Bíceps',
-                'grupo_muscular' => 'Brazos',
-                'descripcion' => 'Ejercicio para desarrollar los músculos bíceps'
-            ]
-        ];
+        $ejercicios = Exercise::all();
 
         return view('exercises.index',compact('ejercicios'));
     }
@@ -63,7 +38,8 @@ class ExerciseController extends Controller
      */
     public function show(int $id)
     {
-        return view('exercises.show',['idExersice'=>$id]);
+        $exercise = Exercise::find($id);
+        return view('exercises.show',compact('exercise'));
     }
 
     /**
@@ -71,7 +47,8 @@ class ExerciseController extends Controller
      */
     public function edit(int $id)
     {
-        return view('exercises.edit');
+        $exercise = Exercise::find($id);
+        return view('exercises.edit',compact('exercise'));
     }
 
     /**

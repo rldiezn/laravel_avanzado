@@ -87,7 +87,6 @@
     </style>
 </head>
 <body>
-  {{$descanso}}
     <div class="container">
         <div class="header">
             <h1>Editar Ejercicio</h1>
@@ -95,7 +94,7 @@
         <form>
             <div class="form-group">
                 <label for="nombre">Nombre del Ejercicio</label>
-                <input type="text" id="nombre" name="nombre" value="Press de Banca" required>
+                <input type="text" id="nombre" name="nombre" value="{{$exercise->name}}" required>
             </div>
 
             <div class="form-group">
@@ -111,7 +110,7 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" required>Ejercicio fundamental para desarrollar los músculos pectorales</textarea>
+                <textarea id="descripcion" name="descripcion" required>{{$exercise->description}}</textarea>
             </div>
 
             <div class="form-group">

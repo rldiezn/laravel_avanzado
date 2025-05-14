@@ -118,11 +118,11 @@
         <img src="https://static.strengthlevel.com/images/exercises/bench-press/bench-press-400.avif" alt="Press de Banca" class="exercise-image">
         <div class="exercise-content">
             <div class="exercise-header">
-                <h2 class="exercise-title">Press de Banca</h2>
-                <span class="exercise-muscle-group">Pecho</span>
+                <h2 class="exercise-title">{{ $exercise->name }}</h2>
+                <span class="exercise-muscle-group">{{ $exercise->category->name }}</span>
             </div>
             <p class="exercise-description">
-                El press de banca es un ejercicio fundamental para desarrollar los músculos pectorales, trabajando también tríceps y deltoides. Es uno de los movimientos más importantes en el entrenamiento de fuerza y culturismo.
+                {{ $exercise->description }}
             </p>
             <div class="exercise-details">
                 <div class="detail-item">
