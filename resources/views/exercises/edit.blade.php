@@ -85,32 +85,47 @@
             background-color: #da190b;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Editar Ejercicio</h1>
         </div>
-        <form>
+        @if ($errors->any())
+            <ul class="text-left text-gray-500 dark:text-gray-400">
+                @foreach($errors->all() as $error)
+                    <li class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <!-- Ícono X (Cruz) -->
+                        <svg class="shrink-0 w-3.5 h-3.5 text-red-500 dark:text-red-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <span>{{$error}}</span>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+        <form  action="{{ route('exercise.update',$exercise) }}" method="POST">
+            @csrf
+            @method('PATCH')
             <div class="form-group">
-                <label for="nombre">Nombre del Ejercicio</label>
-                <input type="text" id="nombre" name="nombre" value="{{$exercise->name}}" required>
+                <label for="name">Nombre del Ejercicio</label>
+                <input type="text" id="name" name="name" value="{{ old('name',$exercise->name) }}" required>
             </div>
 
             <div class="form-group">
                 <label for="grupo-muscular">Grupo Muscular</label>
-                <select id="grupo-muscular" name="grupo-muscular" required>
-                    <option value="pecho" selected>Pecho</option>
-                    <option value="piernas">Piernas</option>
-                    <option value="hombros">Hombros</option>
-                    <option value="espalda">Espalda</option>
-                    <option value="brazos">Brazos</option>
+                <select id="category" name="category" >
+                    <option value="" >--Seleccione--</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected($exercise->category->id == $category->id) >{{ $category->name }}</option>
+                        @endforeach
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" required>{{$exercise->description}}</textarea>
+                <label for="description">Descripción</label>
+                <textarea id="description" name="description" required>{{$exercise->description}}</textarea>
             </div>
 
             <div class="form-group">
@@ -121,6 +136,11 @@
             <div class="form-group">
                 <label for="repeticiones">Repeticiones Recomendadas</label>
                 <input type="number" id="repeticiones" name="repeticiones" value="10" min="1" max="30">
+            </div>
+
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input type="text" id="slug" name="slug" value="{{ old('slug',$exercise->slug) }}" required>
             </div>
 
             <div class="btn-actions">

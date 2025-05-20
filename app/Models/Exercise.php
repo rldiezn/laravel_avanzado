@@ -14,8 +14,15 @@ class Exercise extends Model
      */
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'category_id',
+        'slug'
     ];
+
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
 
     public function category(){
         return $this->belongsTo(Category::class);

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExerciseRequest;
+use App\Models\Category;
 use App\Models\Exercise;
+use Database\Seeders\ExerciseSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use PhpParser\Node\Expr;
 
 class ExerciseController extends Controller
 {
@@ -22,48 +27,64 @@ class ExerciseController extends Controller
      */
     public function create()
     {
-        return view('exercises.create');
+        return view('exercises.create')->with('categories' , Category::all());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ExerciseRequest $request)
     {
-        return 'esta es la ruta para crear un ejercicio';
+
+        Exercise::create([
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'description' => $request->description,
+            'slug' => $request->slug ?? Str::slug($request->name)
+        ]);
+
+        return redirect()->route('exercise.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Exercise $exercise)
     {
-        $exercise = Exercise::find($id);
         return view('exercises.show',compact('exercise'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $id)
+    public function edit(Exercise $exercise)
     {
-        $exercise = Exercise::find($id);
-        return view('exercises.edit',compact('exercise'));
+        $categories = Category::all();
+        return view('exercises.edit',compact('exercise','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ExerciseRequest $request, Exercise $exercise)
     {
-        return 'Esta es la ruta para mandar a editar los datos de un ejercicios';
+
+        $exercise->update([
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'description' => $request->description,
+            'slug' => $request->slug ?? Str::slug($request->name)
+        ]);
+
+        return redirect()->route('exercise.edit',$exercise);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Exercise $exercise)
     {
-        return 'esta es la ruta para borrar';
+        $exercise->delete();
+        return redirect()->route('exercise.index');
     }
 }

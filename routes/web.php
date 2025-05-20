@@ -36,10 +36,10 @@ Route::group([
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
     Route::post('/store','store')->name('store');
-    Route::get('/{id}','show')->name('show');
-    Route::get('/edit/{id}','edit')->name('edit');
-    Route::patch('/{id}','update')->name('update');
-    Route::delete('/{id}','destroy')->name('destroy')->whereNumber('id');
+    Route::get('/{exercise}','show')->name('show');
+    Route::get('/edit/{exercise}','edit')->name('edit');
+    Route::patch('/update/{exercise}','update')->name('update');
+    Route::delete('/{exercise}','destroy')->name('destroy')->whereNumber('id');
 });
 
 Route::get('/test-composer', function() {

@@ -150,19 +150,23 @@
                 <td>{{ $ejercicio->description }}</td>
                 <td>
                   <div class="action-buttons">
-                    <a href="/exercise/{{ $ejercicio->id }}">
+                    <a href="{{ route('exercise.show', $ejercicio) }}">
                       <button class="btn btn-show" title="Editar">
                           <i class="fas fa-eye"></i>
                       </button>
                     </a>
-                    <a href="/exercise/edit/{{ $ejercicio->id }}">
+                    <a href="{{ route('exercise.edit', $ejercicio) }}">
                       <button class="btn btn-edit" title="Editar">
                           <i class="fas fa-edit"></i>
                       </button>
                     </a>
-                      <button class="btn btn-delete" title="Eliminar">
-                          <i class="fas fa-trash-alt"></i>
-                      </button>
+                        <form action="{{ route('exercise.destroy',$ejercicio) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-delete" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
                   </div>
               </td>
             </tr>
