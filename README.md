@@ -211,10 +211,10 @@ Este proyecto está bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detal
 
 ## 👨‍💻 **Autor**
 
-**[Tu Nombre]**
-- 🌐 GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- 💼 LinkedIn: [Tu LinkedIn](https://linkedin.com/in/tu-perfil)
-- 📧 Email: tu.email@ejemplo.com
+**Ricardo Diez**
+- 🌐 GitHub: [@rldiezn](https://github.com/rldiezn)
+- 💼 LinkedIn: [ricardo-diez](https://www.linkedin.com/in/ricardo-diez/)
+- 📧 Email: rldiezn@gmail.com
 
 ## 🎉 **Agradecimientos**
 
