@@ -16,7 +16,9 @@ class Exercise extends Model
         'name',
         'description',
         'category_id',
-        'slug'
+        'slug',
+        'image_path',
+        'image_local_path'
     ];
 
     public function getRouteKeyName()

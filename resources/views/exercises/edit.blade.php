@@ -105,9 +105,22 @@
                 @endforeach
             </ul>
         @endif
-        <form  action="{{ route('exercise.update',$exercise) }}" method="POST">
+        
+        <form  action="{{ route('exercise.update',$exercise) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
+            <div class="relative mb-2">
+                <img class="w-full aspect-video object-cover object-center" src="{{ $exercise->image_path ? Storage::url($exercise->image_path) : "/img/no_image.png" }}" id="imgPreview">
+                <div class="absolute top-7 right-5">
+                    <label class="cursor-pointer" for="image">
+                        <!-- Ícono de upload -->
+                        <svg class="bg-white w-9 h-9 px-1 rounded text-gray-800 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12 3a1 1 0 0 1 .78.375l4 5a1 1 0 1 1-1.56 1.25L13 6.85V14a1 1 0 1 1-2 0V6.85L8.78 9.626a1 1 0 1 1-1.56-1.25l4-5A1 1 0 0 1 12 3ZM9 14v-1H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-4v1a3 3 0 1 1-6 0Zm8 2a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+                        </svg>                    
+                    </label>
+                    <input type="file" class="hidden" id="image" name="image" value="" accept="image/*"  onchange="previewImage(event, '#imgPreview')">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="name">Nombre del Ejercicio</label>
                 <input type="text" id="name" name="name" value="{{ old('name',$exercise->name) }}" required>
@@ -153,5 +166,6 @@
             </div>
         </form>
     </div>
+    @vite(['resources/js/app.js'])
 </body>
 </html>

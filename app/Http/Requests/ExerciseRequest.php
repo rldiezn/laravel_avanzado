@@ -31,6 +31,7 @@ class ExerciseRequest extends FormRequest
         return [
             'name' => 'required',
             'category' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
             'description' => 'required',
             'slug' => 'required|unique:exercises,slug'.$exercise_id,
         ];
